@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\localgov_roles\RolesHelper;
+
+/**
+ * Implements hook_localgov_role_default().
+ */
+function localgov_2fa_localgov_roles_default() {
+  $permissions = [
+    'setup own tfa',
+    'disable own tfa',
+  ];
+  return [
+    RolesHelper::AUTHOR_ROLE => $permissions,
+    RolesHelper::EDITOR_ROLE => $permissions,
+    RolesHelper::CONTRIBUTOR_ROLE => $permissions,
+  ];
+}

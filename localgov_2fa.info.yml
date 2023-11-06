@@ -1,0 +1,10 @@
+name: 'LocalGov 2FA'
+description: 'Adds two-factor authentication.'
+core_version_requirement: ^9 || ^10
+type: module
+package: LocalGov Drupal
+
+dependencies:
+  - drupal:tfa
+  - drupal:sodium
+  - localgov_roles:localgov_roles

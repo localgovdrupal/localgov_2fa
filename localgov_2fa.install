@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function localgov_2fa_install() {
+
+  $configFactory = \Drupal::configFactory();
+
+  $allowed_validation_plugins = [
+    'tfa_recovery_code' => 'tfa_recovery_code',
+    'tfa_totp' => 'tfa_totp',
+  ];
+
+  $validation_plugin_settings = [
+    'tfa_recovery_code' => [
+      'recovery_codes_amount' => 10,
+    ],
+    'tfa_totp' => [
+      'time_skew' => 2,
+      'site_name_prefix' => 0,
+      'name_prefix' => '',
+      'issuer' => $configFactory->get('system.site')->get('name'),
+    ],
+  ];
+
+  $required_roles = [
+    'administrator' => 'administrator',
+    'localgov_author' => 'localgov_author',
+    'localgov_contributor' => 'localgov_contributor',
+    'localgov_editor' => 'localgov_editor',
+    'localgov_user_manager' => 'localgov_user_manager',
+    'authenticated' => '0',
+  ];
+
+  $tfaSettings = $configFactory->getEditable('tfa.settings');
+  $tfaSettings
+    ->set('enabled', true)
+    ->set('required_roles', $required_roles)
+    ->set('allowed_validation_plugins', $allowed_validation_plugins)
+    ->set('default_validation_plugin', 'tfa_totp')
+    ->set('validation_plugin_settings', $validation_plugin_settings)
+    ->set('validation_skip', 99)
+    ->set('encryption', 'sodium')
+    ->save();
+
+  // Replace our placeholder key with a randomly generated one.
+  $keySettings = $configFactory->getEditable('key.key.2fa_sodium');
+  $keySettings->set('key_provider_settings', [
+    'key_value' => base64_encode(random_bytes(32)),
+    'base64_encoded' => true,
+  ])->save();
+}
