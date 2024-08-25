@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains localgov_2fa.module.
+ */
+
 use Drupal\localgov_roles\RolesHelper;
 
 /**
