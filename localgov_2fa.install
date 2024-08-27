@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * LocalGov 2FA install file.
+ */
+
+/**
  * Implements hook_install().
  */
 function localgov_2fa_install() {
@@ -35,7 +40,7 @@ function localgov_2fa_install() {
 
   $tfaSettings = $configFactory->getEditable('tfa.settings');
   $tfaSettings
-    ->set('enabled', true)
+    ->set('enabled', TRUE)
     ->set('required_roles', $required_roles)
     ->set('allowed_validation_plugins', $allowed_validation_plugins)
     ->set('default_validation_plugin', 'tfa_totp')
@@ -48,6 +53,6 @@ function localgov_2fa_install() {
   $keySettings = $configFactory->getEditable('key.key.2fa_sodium');
   $keySettings->set('key_provider_settings', [
     'key_value' => base64_encode(random_bytes(32)),
-    'base64_encoded' => true,
+    'base64_encoded' => TRUE,
   ])->save();
 }
