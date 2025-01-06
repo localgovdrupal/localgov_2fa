@@ -8,7 +8,7 @@
 /**
  * Implements hook_install().
  */
-function localgov_2fa_install() {
+function localgov_2fa_install(): void {
 
   $configFactory = \Drupal::configFactory();
 
