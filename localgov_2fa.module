@@ -10,7 +10,7 @@ use Drupal\localgov_roles\RolesHelper;
 /**
  * Implements hook_localgov_role_default().
  */
-function localgov_2fa_localgov_roles_default() {
+function localgov_2fa_localgov_roles_default(): array {
   $permissions = [
     'setup own tfa',
     'disable own tfa',
