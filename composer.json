@@ -1,8 +1,8 @@
 {
-    "name": "localgovdrupal/localgov_2fa",
+    "name": "drupal/localgov_2fa",
     "description": "Two-factor authentication for LocalGov Drupal.",
     "type": "drupal-module",
-    "homepage": "https://github.com/localgovdrupal/localgov_2fa",
+    "homepage": "https://www.drupal.org/project/localgov_2fa",
     "license": "GPL-2.0-or-later",
     "minimum-stability": "dev",
     "require": {
